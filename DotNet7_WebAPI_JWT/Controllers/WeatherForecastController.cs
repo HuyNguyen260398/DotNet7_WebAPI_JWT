@@ -1,3 +1,5 @@
+using DotNet7_WebAPI_JWT.Core.OtherObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNet7_WebAPI_JWT.Controllers;
@@ -14,6 +16,30 @@ public class WeatherForecastController : ControllerBase
     [HttpGet]
     [Route("Get")]
     public IActionResult Get()
+    {
+        return Ok(Summaries);
+    }
+
+    [HttpGet]
+    [Route("GetUserRole")]
+    [Authorize(Roles = StaticUserRoles.USER)]
+    public IActionResult GetUserRole()
+    {
+        return Ok(Summaries);
+    }
+
+    [HttpGet]
+    [Route("GetAdminRole")]
+    [Authorize(Roles = StaticUserRoles.ADMIN)]
+    public IActionResult GetAdminRole()
+    {
+        return Ok(Summaries);
+    }
+
+    [HttpGet]
+    [Route("GetOwnerRole")]
+    [Authorize(Roles = StaticUserRoles.OWNER)]
+    public IActionResult GetOwnerRole()
     {
         return Ok(Summaries);
     }
